@@ -1,5 +1,6 @@
 # Dockibby
-![image](https://user-images.githubusercontent.com/83268468/191113730-6dcb2799-1586-4248-8d3a-a2ba8bbbad49.png)
+![image](https://user-images.githubusercontent.com/83268468/191113826-4465efc8-0875-44b2-bd9c-69721da20adb.png)
+
 
 A new Flutter project by
 
