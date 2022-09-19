@@ -47,10 +47,70 @@ class DrawerWidget extends StatelessWidget {
           Divider(
             thickness: 1,
           ),
-          _listTiles(label: 'Log out', fct: () {}, icon: Icons.logout),
+          _listTiles(
+              label: 'Log out',
+              fct: () {
+                _logout(context);
+              },
+              icon: Icons.logout),
         ],
       ),
     );
+  }
+
+  void _logout(context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.network(
+                    'https://cdn-icons-png.flaticon.com/512/7756/7756285.png', //<a href="https://www.flaticon.com/free-icons/logout" title="logout icons">Logout icons created by IYAHICON - Flaticon</a>
+                    height: 20,
+                    width: 20,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Sign out',
+                    style: TextStyle(
+                      color: Constants.darkBlue,
+                      fontSize: 19,
+                      //fontStyle: FontStyle.italic,),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            content: Text(
+              'Do you want to sign out?',
+              style: TextStyle(
+                color: Constants.darkBlue,
+                fontSize: 16,
+                //fontStyle: FontStyle.italic,),
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'Sign Out',
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.canPop(context) ? Navigator.pop(context) : null;
+                },
+                child: Text('Cancel'),
+              ),
+            ],
+          );
+        });
   }
 
   Widget _listTiles(

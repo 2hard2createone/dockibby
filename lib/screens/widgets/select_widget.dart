@@ -52,7 +52,7 @@ class _SelectWidgetState extends State<SelectWidget> {
               color: Colors.pink.shade800,
             ),
             Text(
-              'Subtitle/Work Desciption',
+              'Subtitle/Work Description',
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(fontSize: 16),
