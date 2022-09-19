@@ -2,7 +2,7 @@
 ![image](https://user-images.githubusercontent.com/83268468/191113826-4465efc8-0875-44b2-bd9c-69721da20adb.png)
 
 
-A new Flutter project by
+A Flutter project for Swinburne Univ Sem 4 TDP by
 
 Group 7 Members : 
 
