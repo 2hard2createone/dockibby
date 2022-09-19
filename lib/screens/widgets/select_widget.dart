@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:workos_english/constants/constants.dart';
 
 class SelectWidget extends StatefulWidget {
   @override
@@ -15,7 +14,7 @@ class _SelectWidgetState extends State<SelectWidget> {
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       child: ListTile(
         onTap: () {},
-        onLongPress: () {},
+        onLongPress: _deleteDialog,
         contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         leading: Container(
           padding: EdgeInsets.only(right: 12),
@@ -39,7 +38,10 @@ class _SelectWidgetState extends State<SelectWidget> {
           'Title',
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Constants.darkBlue,
+          ),
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +52,7 @@ class _SelectWidgetState extends State<SelectWidget> {
               color: Colors.pink.shade800,
             ),
             Text(
-              'Subtitle/Task Desciption',
+              'Subtitle/Work Desciption',
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(fontSize: 16),
@@ -64,5 +66,32 @@ class _SelectWidgetState extends State<SelectWidget> {
         ),
       ),
     );
+  }
+
+  _deleteDialog() {
+    showDialog(
+        context: context,
+        builder: (ctx) {
+          return AlertDialog(
+            actions: [
+              TextButton(
+                onPressed: () {},
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ),
+                    Text(
+                      'Delete',
+                      style: TextStyle(color: Colors.red),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          );
+        });
   }
 }
