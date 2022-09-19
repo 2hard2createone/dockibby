@@ -13,3 +13,12 @@ GROUP 7
 -XIN SU - 103510544 
 
 -XIAO YU LIM - 103498734 
+
+
+Group Member : 
+
+- Shahneezar
+- Nishant
+- Siaw
+- Nick 
+- Moses
