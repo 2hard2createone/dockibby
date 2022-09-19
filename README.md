@@ -1,16 +1,15 @@
 # Dockibby
 
-A new Flutter project.
+A new Flutter project by
 
-## Getting Started
+GROUP 7 
 
-This project is a starting point for a Flutter application.
+KIROLOS KALDAS -102501437 
 
-A few resources to get you started if this is your first Flutter project:
+NICK KIM - 103146619 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+SRIDHAR REDDY SINGI REDDY -102642653 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+XIN SU - 103510544 
+
+XIAO YU LIM - 103498734 
