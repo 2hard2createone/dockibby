@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workos_english/constants/constants.dart';
 import 'package:workos_english/screens/widgets/drawer_widget.dart';
 import 'package:workos_english/screens/widgets/select_widget.dart';
 
@@ -8,12 +9,6 @@ class selectScreen extends StatefulWidget {
 }
 
 class _selectScreenState extends State<selectScreen> {
-  List<String> workCategoryList = [
-    'In Progress',
-    'Cancelled',
-    'Completed',
-  ];
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -76,10 +71,13 @@ class _selectScreenState extends State<selectScreen> {
               width: size.width * 0.7,
               child: ListView.builder(
                   shrinkWrap: true,
-                  itemCount: workCategoryList.length,
+                  itemCount: Constants.workCategoryList.length,
                   itemBuilder: (ctxx, index) {
                     return InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        print(
+                            'workCategoryList[index], ${Constants.workCategoryList[index]}');
+                      },
                       child: Row(
                         children: [
                           Icon(
@@ -90,9 +88,12 @@ class _selectScreenState extends State<selectScreen> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              workCategoryList[index],
+                              Constants.workCategoryList[index],
                               style: TextStyle(
-                                  fontSize: 18, fontStyle: FontStyle.italic),
+                                color: Constants.darkBlue,
+                                fontSize: 18,
+                                fontStyle: FontStyle.italic,
+                              ),
                             ),
                           )
                         ],

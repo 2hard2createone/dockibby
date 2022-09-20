@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workos_english/constants/constants.dart';
+import 'package:workos_english/inner_screens/askSupport.dart';
+import 'package:workos_english/screens/select.dart';
 
 class DrawerWidget extends StatelessWidget {
   Constants _constants = Constants();
@@ -16,7 +18,7 @@ class DrawerWidget extends StatelessWidget {
                   child: Image.asset('assets/images/ldk_icon2.jpg'),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 Flexible(
                   child: Text(
@@ -32,20 +34,52 @@ class DrawerWidget extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 10,
           ),
           _listTiles(
+              label: 'Ask for Support',
+              fct: () {
+                _navigateToAskForSupportScreen(context);
+              },
+              icon: Icons.handshake_rounded),
+          _listTiles(
               label: 'Support History',
-              fct: () {},
+              fct: () {
+                _navigateToSupportHistoryScreen(context);
+              },
               icon: Icons.history_outlined),
           _listTiles(
               label: 'My Supporters', fct: () {}, icon: Icons.people_outline),
           _listTiles(label: 'Settings', fct: () {}, icon: Icons.settings),
           SizedBox(
-            height: 120,
+            height: 80,
+          ),
+          //Ask Help
+          Container(
+            color: Colors.red,
+            height: 80,
+            alignment: Alignment.center,
+            child: ListTile(
+              //tileColor: Colors.red,
+              onTap: () {},
+              leading: Icon(
+                Icons.local_hospital,
+                size: 60,
+                color: Colors.white,
+              ),
+              title: Text(
+                'SOS\u{00A0}',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 50,
+                  //fontStyle: FontStyle.italic,
+                ),
+              ),
+            ),
           ),
           Divider(
-            thickness: 1,
+            thickness: 2,
           ),
           _listTiles(
               label: 'Log out',
@@ -54,6 +88,24 @@ class DrawerWidget extends StatelessWidget {
               },
               icon: Icons.logout),
         ],
+      ),
+    );
+  }
+
+  void _navigateToAskForSupportScreen(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AskForSupport(),
+      ),
+    );
+  }
+
+  void _navigateToSupportHistoryScreen(context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => selectScreen(),
       ),
     );
   }
