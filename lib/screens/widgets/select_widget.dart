@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workos_english/constants/constants.dart';
+import 'package:workos_english/inner_screens/support_details.dart';
 
 class SelectWidget extends StatefulWidget {
   @override
@@ -13,7 +14,14 @@ class _SelectWidgetState extends State<SelectWidget> {
       elevation: 8,
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       child: ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SupportDetailsScreen(),
+            ),
+          );
+        },
         onLongPress: _deleteDialog,
         contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         leading: Container(

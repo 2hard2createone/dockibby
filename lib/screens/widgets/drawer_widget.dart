@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:workos_english/constants/constants.dart';
 import 'package:workos_english/inner_screens/askSupport.dart';
+import 'package:workos_english/inner_screens/setting.dart';
+import 'package:workos_english/screens/groups.dart';
 import 'package:workos_english/screens/select.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -49,8 +51,17 @@ class DrawerWidget extends StatelessWidget {
               },
               icon: Icons.history_outlined),
           _listTiles(
-              label: 'My Supporters', fct: () {}, icon: Icons.people_outline),
-          _listTiles(label: 'Settings', fct: () {}, icon: Icons.settings),
+              label: 'My Supporters',
+              fct: () {
+                _navigateToMySupportersScreen(context);
+              },
+              icon: Icons.people_outline),
+          _listTiles(
+              label: 'Settings',
+              fct: () {
+                _navigateToSettingsScreen(context);
+              },
+              icon: Icons.settings),
           SizedBox(
             height: 80,
           ),
@@ -106,6 +117,24 @@ class DrawerWidget extends StatelessWidget {
       context,
       MaterialPageRoute(
         builder: (context) => selectScreen(),
+      ),
+    );
+  }
+
+  void _navigateToMySupportersScreen(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AllGroupScreen(),
+      ),
+    );
+  }
+
+  void _navigateToSettingsScreen(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SettingScreen(),
       ),
     );
   }

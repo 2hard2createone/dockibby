@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:workos_english/constants/constants.dart';
 import 'package:workos_english/screens/widgets/drawer_widget.dart';
@@ -18,10 +16,11 @@ class _AskForSupportState extends State<AskForSupport> {
       TextEditingController(text: 'Select preferred date and time');
 
   final _formKey = GlobalKey<FormState>();
+  DateTime? picked;
+  TimeOfDay? picked_2;
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _SupportCategoryController.dispose();
     _SupportTitleController.dispose();
@@ -40,7 +39,7 @@ class _AskForSupportState extends State<AskForSupport> {
 
   @override
   Widget build(BuildContext context) {
-    //Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Constants.darkBlue),
@@ -105,7 +104,7 @@ class _AskForSupportState extends State<AskForSupport> {
                             controller: _SupportCategoryController,
                             enabled: false,
                             fct: () {
-                              //_showSupportGroupCategoriesDialog(size: size);
+                              _showSupportGroupCategoriesDialog(size: size);
                             },
                             maxLength: 100),
                         //Support Date and Time
@@ -114,7 +113,9 @@ class _AskForSupportState extends State<AskForSupport> {
                             valueKey: 'DateTime',
                             controller: _DateTimeController,
                             enabled: false,
-                            fct: () {},
+                            fct: () {
+                              _pickDateDialog();
+                            },
                             maxLength: 100),
                       ],
                     ),
@@ -209,63 +210,113 @@ class _AskForSupportState extends State<AskForSupport> {
     );
   }
 
-  // _showSupportGroupCategoriesDialog({required Size size}) {
-  //   showDialog(
-  //       context: context,
-  //       builder: (ctx) {
-  //         return AlertDialog(
-  //           title: Text(
-  //             'Category',
-  //             style: TextStyle(
-  //               fontSize: 20,
-  //               color: Colors.pink.shade800,
-  //             ),
-  //           ),
-  //           content: Container(
-  //             width: size.width * 0.7,
-  //             child: ListView.builder(
-  //                 shrinkWrap: true,
-  //                 itemCount: Constants.supportGroupCategoryList.length,
-  //                 itemBuilder: (ctxx, index) {
-  //                   return InkWell(
-  //                     onTap: () {
-  //                       print(
-  //                           'supportGroupCategoryList[index], ${Constants.supportGroupCategoryList[index]}');
-  //                     },
-  //                     child: Row(
-  //                       children: [
-  //                         Icon(
-  //                           Icons.check_circle_rounded,
-  //                           color: Colors.red.shade200,
-  //                         ),
-  //                         //SizedBox(width: 10,),
-  //                         Padding(
-  //                           padding: const EdgeInsets.all(8.0),
-  //                           child: Text(
-  //                             Constants.supportGroupCategoryList[index],
-  //                             style: TextStyle(
-  //                               color: Constants.darkBlue,
-  //                               fontSize: 18,
-  //                               fontStyle: FontStyle.italic,
-  //                             ),
-  //                           ),
-  //                         )
-  //                       ],
-  //                     ),
-  //                   );
-  //                 }),
-  //           ),
-  //           actions: [
-  //             TextButton(
-  //               onPressed: () {
-  //                 Navigator.canPop(context) ? Navigator.pop(context) : null;
-  //               },
-  //               child: Text('Close'),
-  //             ),
-  //           ],
-  //         );
-  //       });
-  // }
+  _showSupportGroupCategoriesDialog({required Size size}) {
+    showDialog(
+        context: context,
+        builder: (ctx) {
+          return AlertDialog(
+            title: Text(
+              'Category',
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.pink.shade800,
+              ),
+            ),
+            content: Container(
+              width: size.width * 0.7,
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: Constants.supportGroupCategoryList.length,
+                  itemBuilder: (ctxx, index) {
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          _SupportCategoryController.text =
+                              Constants.supportGroupCategoryList[index];
+                          Navigator.pop(context);
+                        });
+                        // print(
+                        //     'supportGroupCategoryList[index], ${Constants.supportGroupCategoryList[index]}');
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.check_circle_rounded,
+                            color: Colors.red.shade200,
+                          ),
+                          //SizedBox(width: 10,),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              Constants.supportGroupCategoryList[index],
+                              style: TextStyle(
+                                color: Constants.darkBlue,
+                                fontSize: 18,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  }),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.canPop(context) ? Navigator.pop(context) : null;
+                },
+                child: Text('Close'),
+              ),
+            ],
+          );
+        });
+  }
+
+  Future<void> _pickDateDialog() async {
+    picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now().subtract(
+        Duration(days: 0),
+      ),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null) {
+      picked_2 = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay(
+          hour: 00,
+          minute: 00,
+        ),
+      );
+
+      if (picked_2 != null) {
+        String _hour = picked_2!.hourOfPeriod.toString();
+        if (_hour == '0') {
+          //print('its 0 $_hour');
+          _hour = '00';
+        }
+
+        String _minute = picked_2!.minute.toString();
+        if (_minute == '0') {
+          _minute = '00';
+        }
+
+        String _period = picked_2!.period.toString();
+        _period = _period.substring(_period.length - 2);
+
+        //print('picked $picked');
+        setState(
+          () {
+            //_DateTimeController.text = picked!.year.toString();
+            _DateTimeController.text =
+                '${picked!.day}/${picked!.month}/${picked!.year} $_hour:$_minute $_period';
+          },
+        );
+      }
+    }
+  }
 
   Widget _textTitles({required String label}) {
     return Padding(
