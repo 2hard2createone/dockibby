@@ -65,30 +65,30 @@ class DrawerWidget extends StatelessWidget {
           SizedBox(
             height: 80,
           ),
-          //Ask Help
-          Container(
-            color: Colors.red,
-            height: 80,
-            alignment: Alignment.center,
-            child: ListTile(
-              //tileColor: Colors.red,
-              onTap: () {},
-              leading: Icon(
-                Icons.local_hospital,
-                size: 60,
-                color: Colors.white,
-              ),
-              title: Text(
-                'SOS\u{00A0}',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 50,
-                  //fontStyle: FontStyle.italic,
-                ),
-              ),
-            ),
-          ),
+          // //Ask Help
+          // Container(
+          //   color: Colors.red,
+          //   height: 80,
+          //   alignment: Alignment.center,
+          //   child: ListTile(
+          //     //tileColor: Colors.red,
+          //     onTap: () {},
+          //     leading: Icon(
+          //       Icons.local_hospital,
+          //       size: 60,
+          //       color: Colors.white,
+          //     ),
+          //     title: Text(
+          //       'SOS\u{00A0}',
+          //       textAlign: TextAlign.center,
+          //       style: TextStyle(
+          //         color: Colors.white,
+          //         fontSize: 50,
+          //         //fontStyle: FontStyle.italic,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Divider(
             thickness: 2,
           ),

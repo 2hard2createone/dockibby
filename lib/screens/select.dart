@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workos_english/constants/constants.dart';
+import 'package:workos_english/screens/urgent_help.dart';
 import 'package:workos_english/screens/widgets/drawer_widget.dart';
 import 'package:workos_english/screens/widgets/select_widget.dart';
 
@@ -49,9 +50,46 @@ class _selectScreenState extends State<selectScreen> {
           ),
         ],
       ),
-      body: ListView.builder(itemBuilder: (BuildContext context, int index) {
-        return SelectWidget();
-      }),
+      body: Stack(
+        children: <Widget>[
+          ListView.builder(itemBuilder: (BuildContext context, int index) {
+            return SelectWidget();
+          }),
+          //bottom button
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: 100,
+              margin: const EdgeInsets.all(0),
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  _navigateToUrgentHelpScreen(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red[500],
+                  padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                ),
+                child: Wrap(
+                  children: <Widget>[
+                    Icon(
+                      Icons.warning_rounded,
+                      size: 30,
+                    ),
+                    const Text(
+                      ' Need Urgent Help?',
+                      style: TextStyle(
+                        fontSize: 29,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -115,5 +153,14 @@ class _selectScreenState extends State<selectScreen> {
             ],
           );
         });
+  }
+
+  void _navigateToUrgentHelpScreen(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => UrgentHelpScreen(),
+      ),
+    );
   }
 }
