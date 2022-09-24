@@ -10,7 +10,8 @@ class AskForSupport extends StatefulWidget {
 class _AskForSupportState extends State<AskForSupport> {
   TextEditingController _SupportCategoryController =
       TextEditingController(text: 'Select a group');
-  TextEditingController _SupportTitleController = TextEditingController();
+  TextEditingController _SupportTitleController =
+      TextEditingController(text: 'Select a support type');
   TextEditingController _SupportDescriptionController = TextEditingController();
   TextEditingController _DateTimeController =
       TextEditingController(text: 'Select preferred date and time');
@@ -82,19 +83,21 @@ class _AskForSupportState extends State<AskForSupport> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         //Support Title
-                        _textTitles(label: 'Support Title*'),
+                        _textTitles(label: 'Support Type*'),
                         _textFormField(
                             valueKey: 'SupportTitle',
                             controller: _SupportTitleController,
-                            enabled: true,
-                            fct: () {},
+                            enabled: false,
+                            fct: () {
+                              _showSupportTypeDialog(size: size);
+                            },
                             maxLength: 100),
                         //Support Description
-                        _textTitles(label: 'Support Description*'),
+                        _textTitles(label: 'Support Description'),
                         _textFormField(
                             valueKey: 'SupportDescription',
                             controller: _SupportDescriptionController,
-                            enabled: true,
+                            enabled: false,
                             fct: () {},
                             maxLength: 1000),
                         //Support Category
@@ -208,6 +211,69 @@ class _AskForSupportState extends State<AskForSupport> {
         ),
       ),
     );
+  }
+
+  _showSupportTypeDialog({required Size size}) {
+    showDialog(
+        context: context,
+        builder: (ctx) {
+          return AlertDialog(
+            title: Text(
+              'Support Type',
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.pink.shade800,
+              ),
+            ),
+            content: Container(
+              width: size.width * 0.7,
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: Constants.supportTypeCategoryList.length,
+                  itemBuilder: (ctxx, index) {
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          _SupportTitleController.text =
+                              Constants.supportTypeCategoryList[index];
+                          Navigator.pop(context);
+                        });
+                        // print(
+                        //     'supportTypeCategoryList[index], ${Constants.supportGroupCategoryList[index]}');
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.check_circle_rounded,
+                            color: Colors.red.shade200,
+                          ),
+                          //SizedBox(width: 10,),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              Constants.supportTypeCategoryList[index],
+                              style: TextStyle(
+                                color: Constants.darkBlue,
+                                fontSize: 18,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  }),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.canPop(context) ? Navigator.pop(context) : null;
+                },
+                child: Text('Close'),
+              ),
+            ],
+          );
+        });
   }
 
   _showSupportGroupCategoriesDialog({required Size size}) {

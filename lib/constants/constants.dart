@@ -20,4 +20,21 @@ class Constants {
     'Group H',
     'Group I',
   ];
+
+  static List<String> supportTypeCategoryList = [
+    'Physically unwell',
+    'Need a friend to talk',
+    'Help at home',
+    'Housework',
+    'Help with pet',
+    'Power out',
+    'Get me home',
+    'Get me somewhere',
+    'Car',
+    'Help to get to doctor',
+    'Prayer',
+    'Spiritual',
+    'Shopping',
+    'Others',
+  ];
 }
