@@ -97,7 +97,7 @@ class _AskForSupportState extends State<AskForSupport> {
                         _textFormField(
                             valueKey: 'SupportDescription',
                             controller: _SupportDescriptionController,
-                            enabled: false,
+                            enabled: true,
                             fct: () {},
                             maxLength: 1000),
                         //Support Category
@@ -182,9 +182,9 @@ class _AskForSupportState extends State<AskForSupport> {
         },
         child: TextFormField(
           validator: (value) {
-            if (value!.isEmpty) {
-              return "Value is missing";
-            }
+            // if (value!.isEmpty) {
+            //   return "Value is missing";
+            // }
             return null;
           },
           controller: controller,
